@@ -28,30 +28,47 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $user = Auth::user();
-        $categories = Category::all();
-        $request->validate([
-            'SellerID' => 'required',
-            'Title' => 'required',
-            'Description' => 'required',
-            'Price' => 'required',
-            'Category' => 'required',
-            'Condition' => 'required',
-            'Image' => 'required',
-        ]);
+        // $user = Auth::user();
+        // $categories = Category::all();
+        // Validate the request data
+        try {
+            // Validate the request data
+            $request->validate([
+                'SellerID' => 'required',
+                'Title' => 'required',
+                'Description' => 'required',
+                'Price' => 'required',
+                'Category' => 'required',
+                'Condition' => 'required',
+                'Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
-        $request->Image->store('images', 'public');
-        $request->Image = $request->Image->hashName();
+            // Store the uploaded image
+            // $imagePath = $request->file('Image')->storeAs('public/images', $request->Image->hashName());
+            $imagePath = $request->file('Image')->storeAs('public/images/', $request->file('Image')->getClientOriginalName());
 
-        Product::create($request->all());
+            // Create a new Product with the form data
+            $product = new Product([
+                'SellerID' => $request->input('SellerID'),
+                'Title' => $request->input('Title'),
+                'Description' => $request->input('Description'),
+                'Price' => $request->input('Price'),
+                'Category' => $request->input('Category'),
+                'Condition' => $request->input('Condition'),
+                'Image' => $imagePath, // Save the path to the stored image
+            ]);
 
-        return redirect()->route('testHome')
-                        ->with('success', 'Product created successfully.');
-        // $name = $request->file('image')->getClientoriginalName();
-        // $request->file('photo')->storeAs('public/images/'. $name);
-        // $photo = new Photo();
-        // $photo->name = $name;
-        // $photo->save;
-        // return redirect()->back();
+            // Save the product to the database
+            $product->save();
+
+            // Redirect with success message
+            return redirect()->route('testHome')->with('success', 'Product created successfully.');
+        } catch (\Exception $e) {
+            // Log the exception for further investigation
+            \Log::error('Error creating product: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'Error creating product. Please try again.');
+        }
     }
 }

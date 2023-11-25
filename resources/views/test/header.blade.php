@@ -24,8 +24,8 @@
             <div class="row gy-3 align-items-center">
               <!-- Left elements -->
               <div class="col-lg-2 col-sm-4 col-4">
-                <a href="https://mdbootstrap.com/" target="_blank" class="float-start">
-                    <img src="{{ asset('images/ewe.png') }}" alt="Example Image" height="50">
+                <a href = "/test" class="float-start">
+                    <img src="{{ asset('images/ewe.png') }}" alt="Example Image" height="50" >
                 </a>
               </div>
               <!-- Left elements -->
