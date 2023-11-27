@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', [App\Http\Controllers\HomeController::class, 'testHome'])->name('testHome');
+Route::get('/test', [App\Http\Controllers\ProductController::class, 'show'])->name('testHome');
 
 
 // Route::get('/upload', 'ProductController@create');

@@ -51,179 +51,38 @@
     </header>
 
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <div class="mask" style="height: 50px;">
-              <div class="d-flex justify-content-start align-items-start h-100 m-2">
-                <h6><span class="badge bg-success pt-2">Offer</span></h6>
-              </div>
+        @foreach($products as $product)
+        {{-- @dd($product) --}}
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card my-2 shadow-0">
+                    <a href="#" class="img-wrap">
+                        <div class="mask" style="height: 50px;">
+                            <div class="d-flex justify-content-start align-items-start h-100 m-2">
+                                <h6><span class="badge bg-success pt-2">Offer</span></h6>
+                            </div>
+                        </div>
+                        {{-- <img src="{{ asset('storage/' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> --}}
+                        <img src="{{asset($product['Image'])}}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
+                    </a>
+                    <div class="card-body p-0 pt-3">
+                        <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                        <h5 class="card-title">{{ $product['Title'] }}</h5>
+                        <h5 class="card-title m-0">Rp {{ $product['Price'] }}</h5>
+                        <p class="text-muted mb-0">
+                            Kondisi: {{$product['Condition']}}
+                        </p>
+                        <div class="d-flex flex-row align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                                <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                            </svg>
+                            <p class="text-muted px-1 m-0">
+                                {{ $product['Location'] }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Kaos Oblong</h5>
-            <h5 class="card-title m-0">Rp 120.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Baru
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bandung
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Jaket Barudak Well</h5>
-            <h5 class="card-title m-0">Rp 499.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Baru
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bandung
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Kaos Marco Polo</h5>
-            <h5 class="card-title m-0">Rp 200.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Baru
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bogor
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Celana Seragam</h5>
-            <h5 class="card-title m-0">Rp 200.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Baru
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bogor
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Smartwarch yang keren sekali</h5>
-            <h5 class="card-title m-0">Rp 5.000.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Bekas
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bekasi
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/6.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Smartwatch</h5>
-            <h5 class="card-title m-0">Rp 3.000.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Baru
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Bojongsoang
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Headset Gimang</h5>
-            <h5 class="card-title m-0">Rp 800.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Bekas
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Cilegon
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card my-2 shadow-0">
-          <a href="#" class="img-wrap">
-            <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" class="card-img-top" style="aspect-ratio: 1 / 1">
-          </a>
-          <div class="card-body p-0 pt-3">
-            <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-            <h5 class="card-title">Tas Jeans Cool Bingit</h5>
-            <h5 class="card-title m-0">Rp 300.000</h5>
-            <p class="text-muted mb-0">
-              Kondisi: Bekas
-            </p>
-            <div class="d-flex flex-row align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-              <p class="text-muted px-1 m-0">
-                Jakarta
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+        @endforeach
     </div>
   </div>
 </section>

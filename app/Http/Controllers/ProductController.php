@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
+
 class ProductController extends Controller
 {
     public function create(){
@@ -45,7 +47,7 @@ class ProductController extends Controller
 
             // Store the uploaded image
             // $imagePath = $request->file('Image')->storeAs('public/images', $request->Image->hashName());
-            $imagePath = $request->file('Image')->storeAs('public/images/', $request->file('Image')->getClientOriginalName());
+            $imagePath = $request->file('Image')->store('public/images');
 
             // Create a new Product with the form data
             $product = new Product([
@@ -55,11 +57,12 @@ class ProductController extends Controller
                 'Price' => $request->input('Price'),
                 'Category' => $request->input('Category'),
                 'Condition' => $request->input('Condition'),
-                'Image' => $imagePath, // Save the path to the stored image
+                'Image' => $request->file('Image')->store('storage/images'), // Save the path to the stored image
             ]);
 
             // Save the product to the database
             $product->save();
+
 
             // Redirect with success message
             return redirect()->route('testHome')->with('success', 'Product created successfully.');
@@ -70,5 +73,14 @@ class ProductController extends Controller
             // Redirect back with an error message
             return redirect()->back()->with('error', 'Error creating product. Please try again.');
         }
+    }
+
+    public function show ()
+    {
+        // Fetch products from the database
+        $products = Product::all();
+
+        // Pass the $products variable to the view
+        return view('testHome', compact('products'));
     }
 }

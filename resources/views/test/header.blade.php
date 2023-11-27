@@ -70,9 +70,24 @@
                             </form>
                         </div>
                     </li> --}}
-                    <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p> </a>
+                    {{-- <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p> </a> --}}
+                    <div class="dropdown">
+                        <a href="#" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-alt m-1 me-md-2"></i>
+                            <p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p>
+                        </a>
 
-
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {{-- <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li> --}}
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 @endguest
                 </div>
               </div>
