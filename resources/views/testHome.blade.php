@@ -67,7 +67,7 @@
                     <div class="card-body p-0 pt-3">
                         <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
                         <h5 class="card-title">{{ $product['Title'] }}</h5>
-                        <h5 class="card-title m-0">Rp {{ $product['Price'] }}</h5>
+                        <h5 class="card-title m-0">Rp {{ number_format($product['Price'], 0, ',', '.') }}</h5>
                         <p class="text-muted mb-0">
                             Kondisi: {{$product['Condition']}}
                         </p>
