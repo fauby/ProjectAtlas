@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -28,5 +30,13 @@ class HomeController extends Controller
     public function testHome()
     {
         return view('testHome');
+    }
+
+    public function showProfile(Request $request)
+    {
+        $user = Auth::user();
+        $products = Product::where('SellerID', '=', $user->id)->get();
+        $productsCount = $products->count();
+        return view('profile', compact(['user', 'products', 'productsCount']));
     }
 }

@@ -65,7 +65,7 @@ class ProductController extends Controller
 
 
             // Redirect with success message
-            return redirect()->route('testHome')->with('success', 'Product created successfully.');
+            return redirect()->route('showProfile')->with('success', 'Product created successfully.');
         } catch (\Exception $e) {
             // Log the exception for further investigation
             \Log::error('Error creating product: ' . $e->getMessage());
