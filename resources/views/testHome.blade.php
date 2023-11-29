@@ -1,6 +1,120 @@
 @extends('test.header')
 
 @section('content')
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white shadow-0">
+          <!-- Container wrapper -->
+          <div class="container justify-content-center justify-content-md-between">
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+              <!-- Left links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Navbar dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Elektronik
+                  </a>
+                  <!-- Dropdown menu -->
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Pakaian
+                  </a>
+                  <!-- Dropdown menu -->
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Otomotif
+                  </a>
+                  <!-- Dropdown menu -->
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Olahraga
+                  </a>
+                  <!-- Dropdown menu -->
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Interior
+                  </a>
+                  <!-- Dropdown menu -->
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Semua Kategori</a>
+                </li>
+              </ul>
+              <!-- Left links -->
+            </div>
+          </div>
+          <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
 <!--  intro  -->
 <section class="">
   <div class="bg-primary text-white py-5 ">
@@ -53,21 +167,21 @@
     <div class="row">
         @foreach($products as $product)
         {{-- @dd($product) --}}
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card my-2 shadow-0">
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+                <div class="card my-2 shadow-2-strong">
                     <a href="#" class="img-wrap">
                         <div class="mask" style="height: 50px;">
                             <div class="d-flex justify-content-start align-items-start h-100 m-2">
                                 <h6><span class="badge bg-success pt-2">Offer</span></h6>
                             </div>
                         </div>
-                        {{-- <img src="{{ asset('storage/' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> --}}
-                        <img src="{{asset($product['Image'])}}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
+                        <!-- <img src="{{ asset('storage/app' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> -->
+                        <img src="{{asset($product['Image'])}}" class="card-img-top object-fit-cover" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
                     </a>
-                    <div class="card-body p-0 pt-3">
+                    <div class="card-body p-3">
                         <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
                         <h5 class="card-title">{{ $product['Title'] }}</h5>
-                        <h5 class="card-title m-0">Rp {{ number_format($product['Price'], 0, ',', '.') }}</h5>
+                        <h5 class="card-title m-0">Rp {{ number_format($product['Price'], 0, '.', '.') }}</h5>
                         <p class="text-muted mb-0">
                             Kondisi: {{$product['Condition']}}
                         </p>
