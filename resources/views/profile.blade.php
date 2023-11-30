@@ -56,6 +56,7 @@
                 <div class="row">
                     @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
+                        <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" style="color:inherit;">
                         <div class="card w-100 my-2 shadow-2-strong">
                             <img src= "{{ asset($product['Image']) }}"
                                 class="card-img-top object-fit-cover" style = "aspect-ratio: 1/1;"/>
@@ -89,6 +90,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                     @endforeach
                 </div>

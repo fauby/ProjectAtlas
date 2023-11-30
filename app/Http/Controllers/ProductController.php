@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Images;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -100,7 +102,16 @@ class ProductController extends Controller
         $products = Product::all();
         $images = Images::all(); // Or adjust this query based on your needs
 
-        // Pass the $products and $images variables to the view
+        // Pass the $products variable to the view
         return view('testHome', compact('products', 'images'));
+    }
+
+    public function showProductDetail($id) {
+        $product = Product::findOrFail($id);
+        $user = User::findOrFail($product['SellerID']);
+        $products = Product::all();
+
+        $hari = Carbon::now()->diffInDays($product['created_at']);
+        return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
     }
 }
