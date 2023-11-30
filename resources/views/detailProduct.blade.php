@@ -96,9 +96,10 @@
   <div class="row px-5 mx-5">
     @foreach($products as $produk)
     <div class="col-lg-4 col-md-6 col-sm-6 d-flex flex-wrap justify-content-between">
+      <a href="{{ route('showProductDetail', ['id' => $produk['id']]) }}" style="color:inherit;">
       <div class="card w-90 my-2 shadow-2-strong">
-        <img src="{{ asset($produk['Image']) }}" class="card-img-top" />
-        <div class="card-body d-flex flex-column">
+        <img src="{{ asset($produk['Image']) }}" class="card-img-top" style = "aspect-ratio: 1/1;"/>
+        <div class="card-body d-flex flex-column" style="color:inherit">
           <div class="d-flex flex-column">
             <h5 class="mb-1 me-1">{{ $produk['Title']}}</h5>
             <h5 class="mb-1 me-1">Rp {{number_format($produk['Price'], 0, ',' , '.')}}</h5>
@@ -113,11 +114,12 @@
             </p>
           </div>
           <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-            <a href="#!" class="btn btn-primary shadow-0 me-1">Chat Penjual</a>
-            <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+            <div href="#!" class="btn btn-primary shadow-0 me-1">Chat Penjual</div>
+            <div href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></div>
           </div>
         </div>
       </div>
+      </a>
     </div>
     @endforeach
   </div>
