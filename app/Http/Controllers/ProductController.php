@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Images;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -102,5 +104,23 @@ class ProductController extends Controller
 
         // Pass the $products and $images variables to the view
         return view('testHome', compact('products', 'images'));
+    }
+
+    public function showProductDetail($id) {
+        $product = Product::findOrFail($id);
+        $user = User::findOrFail($product['SellerID']);
+        $products = Product::all();
+
+        $hari = Carbon::now()->diffInDays($product['created_at']);
+        return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
+    }
+
+    public function showProductDetail($id) {
+        $product = Product::findOrFail($id);
+        $user = User::findOrFail($product['SellerID']);
+        $products = Product::all();
+
+        $hari = Carbon::now()->diffInDays($product['created_at']);
+        return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
     }
 }
