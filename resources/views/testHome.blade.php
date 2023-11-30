@@ -167,19 +167,20 @@
     <div class="row">
         @foreach($products as $product)
         {{-- @dd($product) --}}
-            <div class="col-lg-3 col-md-6 col-sm-6 ">
-                <div class="card my-2 shadow-2-strong">
-                    <a href="#" class="img-wrap">
-                        <div class="mask" style="height: 50px;">
-                            <div class="d-flex justify-content-start align-items-start h-100 m-2">
-                                <h6><span class="badge bg-success pt-2">Offer</span></h6>
-                            </div>
-                        </div>
-                        <!-- <img src="{{ asset('storage/app' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> -->
-                        <img src="{{asset($product['Image'])}}" class="card-img-top object-fit-cover" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
-                    </a>
+          <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="card my-2 shadow-2-strong">
+                  <a class="img-wrap" href="{{ route('showProductDetail', ['id' => $product['id']]) }}">
+                      <div class="mask" style="height: 50px;">
+                          <div class="d-flex justify-content-start align-items-start h-100 m-2">
+                              <h6><span class="badge bg-success pt-2">Offer</span></h6>
+                          </div>
+                      </div>
+                      <!-- <img src="{{ asset('storage/app' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> -->
+                      <img src="{{asset($product['Image'])}}" class="card-img-top object-fit-cover" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
+                  </a>
+                  <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" style="color:inherit;">
                     <div class="card-body p-3">
-                        <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                        <div href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></div>
                         <h5 class="card-title">{{ $product['Title'] }}</h5>
                         <h5 class="card-title m-0">Rp {{ number_format($product['Price'], 0, '.', '.') }}</h5>
                         <p class="text-muted mb-0">
@@ -194,8 +195,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
+                  </a>
+              </div>
+          </div>
         @endforeach
     </div>
   </div>
