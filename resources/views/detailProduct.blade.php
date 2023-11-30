@@ -122,6 +122,7 @@
       </a>
     </div>
     @endforeach
+    // .
   </div>
 </section>
     <!-- MDB -->
