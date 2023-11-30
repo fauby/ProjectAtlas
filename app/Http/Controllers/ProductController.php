@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Images;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -42,12 +43,12 @@ class ProductController extends Controller
                 'Price' => 'required',
                 'Category' => 'required',
                 'Condition' => 'required',
-                'Image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'Images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
             // Store the uploaded image
             // $imagePath = $request->file('Image')->storeAs('public/images', $request->Image->hashName());
-            $imagePath = $request->file('Image')->store('public/images');
+            // $imagePath = $request->file('Image')->store('public/images');
 
             // Create a new Product with the form data
             $product = new Product([
@@ -57,15 +58,33 @@ class ProductController extends Controller
                 'Price' => $request->input('Price'),
                 'Category' => $request->input('Category'),
                 'Condition' => $request->input('Condition'),
-                'Image' => $request->file('Image')->store('storage/images'), // Save the path to the stored image
+                // 'Image' => $request->file('Image')->store('storage/images'), // Save the path to the stored image
             ]);
 
             // Save the product to the database
             $product->save();
 
+            // Store the uploaded images
+            foreach ($request->file('Images') as $image) {
+                $image->store('public/images');
+                // $product->images()->create(['Images' => $image->store('storage/images')]);
+                // $product->images()->create([
+                //     'Images' => $image->store('storage/images'),
+                //     'ProductID' => $product->id,
+                // ]);
+                Images::create([
+                    'Images' => $image->store('storage/images'),
+                    'ProductID' => $product->id,
+                ]);
+
+            }
+
+            // $product->save();
+
 
             // Redirect with success message
             return redirect()->route('showProfile')->with('success', 'Product created successfully.');
+
         } catch (\Exception $e) {
             // Log the exception for further investigation
             \Log::error('Error creating product: ' . $e->getMessage());
@@ -79,8 +98,9 @@ class ProductController extends Controller
     {
         // Fetch products from the database
         $products = Product::all();
+        $images = Images::all(); // Or adjust this query based on your needs
 
-        // Pass the $products variable to the view
-        return view('testHome', compact('products'));
+        // Pass the $products and $images variables to the view
+        return view('testHome', compact('products', 'images'));
     }
 }

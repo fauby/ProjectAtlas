@@ -72,9 +72,9 @@
                     </li> --}}
                     {{-- <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p> </a> --}}
                     <div class="dropdown">
-                        <a href="#" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="{{url('profile')}}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-alt m-1 me-md-2"></i>
-                            <p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p>
+                            <p class="d-none d-md-block mb-0" >{{ Auth::user()->name }}</p>
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -111,7 +111,7 @@
         </div>
         <!-- Jumbotron -->
 
-        
+
       </header>
   <main>
     @yield('content')

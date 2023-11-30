@@ -32,11 +32,4 @@ class HomeController extends Controller
         return view('testHome');
     }
 
-    public function showProfile(Request $request)
-    {
-        $user = Auth::user();
-        $products = Product::where('SellerID', '=', $user->id)->get();
-        $productsCount = $products->count();
-        return view('profile', compact(['user', 'products', 'productsCount']));
-    }
 }

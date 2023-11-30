@@ -19,7 +19,6 @@ return new class extends Migration
             $table->bigInteger('Price')->nullable();
             $table->foreignId('Category')->constrained('category')->onDelete('cascade')->onUpdate('cascade');
             $table->string('Condition')->nullable();
-            $table->string('Image')->nullable();
             $table->timestamps();
         });
     }

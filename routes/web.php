@@ -22,11 +22,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test', [App\Http\Controllers\ProductController::class, 'show'])->name('testHome');
 
 // Profile
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'showProfile'])->name('showProfile');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile'])->name('showProfile');
+Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profileedit');
+Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profileupdate');
 
 // Route::get('/upload', 'ProductController@create');
 // Route::get('/upload', 'ProductController@store');
 Route::get('/upload', [App\Http\Controllers\ProductController::class, 'create'])->name('create');
 Route::post('/upload/add', [App\Http\Controllers\ProductController::class, 'store']);
+
 
 

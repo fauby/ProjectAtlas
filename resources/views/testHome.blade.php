@@ -176,7 +176,13 @@
                             </div>
                         </div>
                         <!-- <img src="{{ asset('storage/app' . $product['Image']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}"> -->
-                        <img src="{{asset($product['Image'])}}" class="card-img-top object-fit-cover" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}">
+                        {{-- <img src="{{asset($product['Image'])}}" class="card-img-top object-fit-cover" style="aspect-ratio: 1 / 1" alt="{{ $product->title }}"> --}}
+                        @foreach($products as $product)
+                            @foreach ($images->where('product_id', $product->id) as $image)
+                                <img src="{{ asset($image->Images) }}" alt="Product Image">
+                            @endforeach
+                            <!-- Other product details output here -->
+                        @endforeach
                     </a>
                     <div class="card-body p-3">
                         <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>

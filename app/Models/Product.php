@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\User;
+use App\Models\Images;
 
 class Product extends Model
 {
@@ -19,7 +21,7 @@ class Product extends Model
         'Price',
         'Category',
         'Condition',
-        'Image',
+        // 'Image',
     ];
 
     public function category()
@@ -30,6 +32,11 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Images::class, 'id');
     }
 
 }
