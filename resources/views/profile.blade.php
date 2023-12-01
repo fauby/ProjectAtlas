@@ -56,10 +56,17 @@
                 <div class="row">
                     @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-                        <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" style="color:inherit;">
-                        <div class="card w-100 my-2 shadow-2-strong">
-                            <img src= "{{ asset($product['Image']) }}"
-                                class="card-img-top object-fit-cover" style = "aspect-ratio: 1/1;"/>
+                    <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" style="color:inherit;">
+                    <div class="card w-100 my-2 shadow-2-strong">
+                        @if ($product->images->count() > 0)
+                            <img src="{{ asset($product->images->first()->Images) }}"
+                                class="card-img-top object-fit-cover" style="aspect-ratio: 1/1;"/>
+                        @else
+                            <!-- Add a placeholder image or default image if there are no images -->
+                            <img src="{{ asset('path/to/placeholder-image.jpg') }}"
+                                class="card-img-top object-fit-cover" style="aspect-ratio: 1/1;"/>
+                        @endif
+
                             <div class="card-body d-flex flex-column">
                                 <div class="d-flex flex-column">
                                     <h5 class="mb-1 me-1">{{ $product['Title'] }}</h5>

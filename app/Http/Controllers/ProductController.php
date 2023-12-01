@@ -107,11 +107,21 @@ class ProductController extends Controller
     }
 
     public function showProductDetail($id) {
-        $product = Product::findOrFail($id);
-        $user = User::findOrFail($product['SellerID']);
-        $products = Product::all();
+        // $product = Product::with('images')->findOrFail($id);
+        // $user = User::findOrFail($product->SellerID);
+        // $products = Product::all();
 
-        $hari = Carbon::now()->diffInDays($product['created_at']);
-        return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
+        // $hari = Carbon::now()->diffInDays($product->created_at);
+
+        $product = Product::findOrFail($id);
+        $user = User::findOrFail($product->SellerID);
+        $images = Images::where('ProductID', $product->id)->get();
+        $products = Product::all();
+        $hari = Carbon::now()->diffInDays($product->created_at);
+
+        return view('detailProduct', compact(['product', 'user', 'images', 'products','hari']));
+
+        // return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
+        // return view('detailProduct', compact(['product', 'user', 'images', 'hari']));
     }
 }

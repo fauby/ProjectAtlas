@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Image;
+
 
 class ProfileController extends Controller
 {
@@ -17,8 +19,9 @@ class ProfileController extends Controller
     public function showProfile(Request $request)
     {
         $user = Auth::user();
-        $products = Product::where('SellerID', '=', $user->id)->get();
+        $products = Product::with('images')->where('SellerID', '=', $user->id)->get();
         $productsCount = $products->count();
+        
         return view('profile', compact(['user', 'products', 'productsCount']));
     }
 

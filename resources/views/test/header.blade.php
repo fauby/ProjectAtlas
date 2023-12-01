@@ -14,6 +14,55 @@
     <link rel="stylesheet" href="/css/mdb.min.css" />
     <!-- Custom styles -->
     <link rel="stylesheet" href="/css/style.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- fslightbox CSS and JS -->
+    <link rel="stylesheet" href="https://fslightbox.com/assets/fslightbox.min.css">
+    <script src="https://fslightbox.com/assets/fslightbox.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your custom script -->
+
+    <script>
+      $(document).ready(function () {
+          // Handle thumbnail click events
+          $('.thumbnail-link').on('click', function (e) {
+              e.preventDefault();
+
+              // Get the target carousel ID
+              var targetCarousel = $(this).data('target');
+
+              // Get the index of the clicked thumbnail
+              var index = $(this).data('slide-to');
+
+              // Update the target carousel to the selected index
+              $(targetCarousel).carousel(index);
+          });
+      });
+    </script>
+
+    <!-- Your first script -->
+    <script>
+        // Custom JavaScript/jQuery for image carousel
+        $(document).ready(function(){
+            // Initialize the Bootstrap Carousel
+            $('.carousel').carousel();
+
+            // Trigger the lightbox when a thumbnail is clicked
+            $('[data-fslightbox]').fslightbox();
+        });
+    </script>
+
+
 </head>
 <body>
     <!--Main Navigation-->

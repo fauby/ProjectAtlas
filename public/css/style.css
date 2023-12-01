@@ -10,3 +10,16 @@
 ul {
   list-style-type: none;
 }
+
+/* styles.css */
+
+/* Custom CSS to change carousel arrow color */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(100%);
+}
