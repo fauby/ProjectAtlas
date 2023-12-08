@@ -166,7 +166,6 @@
 
     <div class="row">
         @foreach($products as $product)
-        {{-- @dd($product) --}}
             <div class="col-lg-3 col-md-6 col-sm-6 ">
                 <div class="card my-2 shadow-2-strong">
                     <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" class="img-wrap">

@@ -107,7 +107,6 @@ class ProductController extends Controller
     }
 
     public function showProductDetail($id) {
-        // $product = Product::with('images')->findOrFail($id);
         // $user = User::findOrFail($product->SellerID);
         // $products = Product::all();
 
