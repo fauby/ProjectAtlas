@@ -154,7 +154,7 @@
                   </button>
                 </form>
               </div>
-              <!-- Right elements -->
+              <!-- Right elements -->
             </div>
           </div>
         </div>
