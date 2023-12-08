@@ -110,8 +110,8 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $user = User::findOrFail($product['SellerID']);
         $products = Product::all();
-
+        $productImages = Images::where('ProductID', $product['ProductID'])->get();
         $hari = Carbon::now()->diffInDays($product['created_at']);
-        return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
+        return view('detailProduct', compact(['product', 'user', 'products', 'hari', 'productImages']));
     }
 }

@@ -9,14 +9,16 @@
       <aside class="col-lg-6">
         <div class="border rounded-4 mb-3 d-flex justify-content-center">
           <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp">
-            <img style="max-width: 100%; max-height: 60vh; margin: auto;" class="rounded-4 fit" src="{{ asset($product['Image']) }}" />
+            <img style="max-width: 100%; max-height: 60vh; margin: auto;" class="rounded-4 fit" src="{{ asset($productImages) }}" />
           </a>
         </div>
         <div class="d-flex justify-content-center mb-3">
+          @foreach ($productImages as $image)
           <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" class="item-thumb">
-            <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big1.webp" />
+            <img width="60" height="60" class="rounded-2" src="{{asset($image['Images'])}}" />
           </a>
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" class="item-thumb">
+          @endforeach
+          <!-- <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" class="item-thumb">
             <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp" />
           </a>
           <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp" class="item-thumb">
@@ -27,7 +29,7 @@
           </a>
           <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" class="item-thumb">
             <img width="60" height="60" class="rounded-2" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" />
-          </a>
+          </a> -->
         </div>
         <!-- thumbs-wrap.// -->
         <!-- gallery-wrap .end// -->

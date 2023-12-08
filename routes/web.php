@@ -30,9 +30,10 @@ Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'u
 // Route::get('/upload', 'ProductController@store');
 Route::get('/upload', [App\Http\Controllers\ProductController::class, 'create'])->name('create');
 Route::post('/upload/add', [App\Http\Controllers\ProductController::class, 'store']);
-
 // Detail Produk
 Route::get('/productDetail/{id}', [App\Http\Controllers\ProductController::class, 'showProductDetail'])->name('showProductDetail');
+// Catalog by Search
+Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'showCatalog'])->name('showCatalog');
 
 
 
