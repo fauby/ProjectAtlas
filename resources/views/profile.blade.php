@@ -6,16 +6,20 @@
     <div class="container py-4">
         <div class="d-flex flex-row px-5 pt-1 mx-5 align-items-center justify-content-between">
             <div class="d-flex flex-row">
-                <img src={{asset($user['image'])}} alt="" class="rounded-circle "
+            <img src="{{asset($user['image'])}}" alt="" class="rounded-circle"
                     style="margin-left: 10%; margin-right:30px; width: 110px; height: 100px; object-fit: cover;">
                 <div class="d-flex flex-column justify-content-between text-white">
-                    <p class="fw-bold mb-0">{{ $user['name'] }}</p>
-                    <p class="mb-0">{{$user['location']}}</p>
+                    <p class="fw-bold mb-0">{{ $user->name }}</p>
+                    <p class="mb-0">{{ $user->location }}</p>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-between">
-                <a href="{{ route('profileedit')}}" class="btn btn-secondary shadow-0 me-1 my-1">Edit profil</a>
-                <a href="{{ route('create') }}" class="btn btn-secondary shadow-0 me-1 my-1">Jual Barang</a>
+                <!-- <a href="{{ route('profileedit')}}" class="btn btn-secondary shadow-0 me-1 my-1">Edit profil</a>
+                <a href="{{ route('create') }}" class="btn btn-secondary shadow-0 me-1 my-1">Jual Barang</a> -->
+                @if(auth()->user()->id == $user->id)
+                    <a href="{{ route('profileedit')}}" class="btn btn-secondary shadow-0 me-1 my-1">Edit profil</a>
+                    <a href="{{ route('create') }}" class="btn btn-secondary shadow-0 me-1 my-1">Jual Barang</a>
+                @endif
             </div>
         </div>
         <!-- Breadcrumb -->

@@ -21,9 +21,36 @@ class ProfileController extends Controller
         $user = Auth::user();
         $products = Product::with('images')->where('SellerID', '=', $user->id)->get();
         $productsCount = $products->count();
-        
+        // dd($user);
         return view('profile', compact(['user', 'products', 'productsCount']));
     }
+
+    public function showProfileSeller($id)
+    {
+        // $user = Auth::user();
+
+        // If $sellerId is provided, fetch the profile for that seller
+        // Otherwise, use the specified seller's profile or all users if $sellerId is not provided
+        if ($id) {
+            $user = User::find($id);
+
+            // Fetch the products for the specified seller
+            $products = Product::with('images')->where('id', '=', $id)->get();
+        } else {
+            // Use the specified seller's profile if $id is provided
+            // Otherwise, use all users if the user is not authenticated
+            $user = $id ? User::find($id) : null;
+
+            // Fetch the products for the specified seller or all users if the user is not authenticated
+            $products = $user ? Product::with('images')->where('id', '=', $user->id)->get() : collect();
+        }
+
+        $productsCount = $products->count();
+        
+        // Pass $sellerId to the view to determine if it's the authenticated user's profile or another seller's profile
+        return view('profile', compact(['user', 'products', 'productsCount']));
+    }
+
 
     public function edit()
     {

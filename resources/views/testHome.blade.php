@@ -169,7 +169,7 @@
         {{-- @dd($product) --}}
             <div class="col-lg-3 col-md-6 col-sm-6 ">
                 <div class="card my-2 shadow-2-strong">
-                    <a href="#" class="img-wrap">
+                    <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" class="img-wrap">
                         <div class="mask" style="height: 50px;">
                             <div class="d-flex justify-content-start align-items-start h-100 m-2">
                                 <h6><span class="badge bg-success pt-2">Offer</span></h6>

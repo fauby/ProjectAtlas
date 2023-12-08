@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
+ 
 // HOME
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', [App\Http\Controllers\ProductController::class, 'show'])->name('testHome');
@@ -24,6 +24,7 @@ Route::get('/test', [App\Http\Controllers\ProductController::class, 'show'])->na
 // Profile
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'showProfile'])->name('showProfile');
 Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profileedit');
+Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'showProfileSeller'])->name('showProfileSeller');
 Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profileupdate');
 
 // Route::get('/upload', 'ProductController@create');

@@ -87,11 +87,11 @@
 <section class="border-top">
   <h3 style="padding-left: 9%; padding-top: 3%;">Profil Penjual</h1>
   <div class="d-flex flex-row pb-5 px-5 pt-1 mx-4">
-    <img src="profil.jpg" alt="" class="rounded-circle mx-5" style="width: 100px; height: 100px; object-fit: cover;">
+    <img src="{{asset($user['image'])}}" alt="" class="rounded-circle mx-5" style="width: 100px; height: 100px; object-fit: cover;">
     <div class="d-flex flex-column">
       <p class="fw-bold mb-0">{{ $user['name']}}</p>
-      <p class="mb-0">Antafunky</p>
-      <a href="">Kunjungi Profil</a>
+      <p class="mb-0">{{$user['location']}}</p>
+      <a href="{{ route('showProfileSeller', ['id' => $user['id']]) }}">Kunjungi Profil</a>
     </div>
   </div>
 </section>
@@ -102,7 +102,7 @@
     <div class="col-lg-4 col-md-6 col-sm-6 d-flex flex-wrap justify-content-between">
       <a href="{{ route('showProductDetail', ['id' => $produk['id']]) }}" style="color:inherit;">
       <div class="card w-90 my-2 shadow-2-strong">
-        <img src="{{ asset($produk['Image']) }}" class="card-img-top" style = "aspect-ratio: 1/1;"/>
+        <img src="{{ asset($produk->images->first()->Images) }}" class="card-img-top" style = "aspect-ratio: 1/1;"/>
         <div class="card-body d-flex flex-column" style="color:inherit">
           <div class="d-flex flex-column">
             <h5 class="mb-1 me-1">{{ $produk['Title']}}</h5>
