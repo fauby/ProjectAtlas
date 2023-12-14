@@ -66,7 +66,7 @@
 </head>
 <body>
     <!--Main Navigation-->
-    <header>
+    <header class>
         <!-- Jumbotron -->
         <div class="p-3 text-center bg-white border-bottom">
           <div class="container">
@@ -142,17 +142,19 @@
               </div>
               <!-- Center elements -->
 
-               <!-- Right elements -->
-               <div class="col-lg-5 col-md-12 col-12">
-                <div class="input-group float-center">
-                  <div class="form-outline">
-                    <input type="search" id="form1" class="form-control" />
-                    <label class="form-label" for="form1">Search</label>
+              <!-- Right elements -->
+              <div class="col-lg-5 col-md-12 col-12" style="width:100%;">
+                <form action="{{route('showCatalog')}}" method="GET" class="input-group float-center">
+                  <div class="d-flex flex-row w-100">
+                    <div class="form-outline" style="width:100%;">
+                      <input type="search" id="form1" class="form-control" name="search"/>
+                      <label class="form-label" for="form1">Search</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;">
+                      <i class="fas fa-search"></i>
+                    </button>
                   </div>
-                  <button type="button" class="btn btn-primary shadow-0">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
+                </form>
               </div>
               <!-- Right elements -->
             </div>
