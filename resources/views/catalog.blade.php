@@ -182,6 +182,11 @@
         </header>
 
         <div class="row">
+            @if(isset($selectedCategory))
+                <div class="col-12">
+                    <h4>Filtered by Category: {{ $selectedCategory->name }}</h4>
+                </div>
+            @endif
             @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
                     <div class="card w-100 my-2 shadow-2-strong">

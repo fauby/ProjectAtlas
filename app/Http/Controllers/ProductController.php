@@ -101,9 +101,9 @@ class ProductController extends Controller
         // Fetch products from the database
         $products = Product::all();
         $images = Images::all(); // Or adjust this query based on your needs
-
+        $categories = Category::all();
         // Pass the $products variable to the view
-        return view('testHome', compact('products', 'images'));
+        return view('testHome', compact('products', 'images', 'categories'));
     }
 
     public function showProductDetail($id) {

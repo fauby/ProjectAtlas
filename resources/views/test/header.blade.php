@@ -102,10 +102,10 @@
                     @endif
                 @else
                     {{-- <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" action="{{ route('logout') }}" method="POST" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
-                        <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p> </a>
+                        <a action="{{ route('logout') }}" method="POST" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-user-alt m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{ Auth::user()->name }}</p> </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -142,19 +142,19 @@
               </div>
               <!-- Center elements -->
 
-              <!-- Right elements -->
-              <div class="col-lg-5 col-md-12 col-12">
-                <form action="{{route('showCatalog')}}" method="GET" class="input-group float-center">
+               <!-- Right elements -->
+               <div class="col-lg-5 col-md-12 col-12">
+                <div class="input-group float-center">
                   <div class="form-outline">
-                    <input type="search" id="form1" class="form-control" name="search"/>
+                    <input type="search" id="form1" class="form-control" />
                     <label class="form-label" for="form1">Search</label>
                   </div>
-                  <button type="submit" class="btn btn-primary shadow-0">
+                  <button type="button" class="btn btn-primary shadow-0">
                     <i class="fas fa-search"></i>
                   </button>
-                </form>
+                </div>
               </div>
-              <!-- Right elements -->
+              <!-- Right elements -->
             </div>
           </div>
         </div>
