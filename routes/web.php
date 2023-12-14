@@ -35,6 +35,7 @@ Route::post('/upload/add', [App\Http\Controllers\ProductController::class, 'stor
 Route::get('/productDetail/{id}', [App\Http\Controllers\ProductController::class, 'showProductDetail'])->name('showProductDetail');
 // Catalog by Search
 Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'showCatalog'])->name('showCatalog');
-
+// Chat
+Route::get('/chat', [App\Http\Controllers\chatController::class, 'index'])->name('index');
 
 
