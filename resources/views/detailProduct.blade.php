@@ -66,16 +66,20 @@
 
           <hr />
 
-          <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Chat Penjual </a>
+          <a href="{{ route('chat.history', ['userId' => $user->id]) }}" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Chat Penjual </a>
           <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Suka </a>
           <div class="col-md-4 col-6 mb-3 mt-3">
             <label class="mb-2 d-block">Buat penawaran</label>
             <div class="d-flex flex-row">
-              <div class="form-outline w-100" style="width: 250px;">
-                <input type="number" id="typeNumber" class="form-control" />
-                <label class="form-label" for="typeNumber">Rp</label>
-              </div>
-              <a href="#" class="btn btn-warning shadow-0"> Tawar </a>
+              <form action="{{ route('sendOfferMessage' , ['userId'=> $user->id])}}" method="POST">
+                @csrf
+                <input type="hidden" name="product" value="{{ $product->Title }}">
+                <div class="form-outline w-100" style="width: 250px;">
+                  <input type="text" id="typeNumber" name="typeNumber" class="form-control" />
+                  <label class="form-label" for="typeNumber">Rp</label>
+                </div>
+                <button type="submit" class="btn btn-warning shadow-0"> Tawar </button>
+              </form>
             </div>
           </div>
         </div>
