@@ -67,7 +67,15 @@
           <hr />
 
           <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Chat Penjual </a>
-          <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Suka </a>
+          <!-- <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Suka </a>
+         -->
+         <form action="{{ route('wishlist', ['id' => $product]) }}" method="post">
+           @method('POST')
+            @csrf
+            <button type="submit" class="btn btn-light border border-secondary py-2 icon-hover px-3">
+                <i class="me-1 fa fa-heart fa-lg"></i> Suka
+            </button>
+        </form>
           <div class="col-md-4 col-6 mb-3 mt-3">
             <label class="mb-2 d-block">Buat penawaran</label>
             <div class="d-flex flex-row">

@@ -125,6 +125,7 @@
                             <i class="fas fa-user-alt m-1 me-md-2"></i>
                             <p class="d-none d-md-block mb-0" >{{ Auth::user()->name }}</p>
                         </a>
+                        
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             {{-- <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li> --}}
@@ -137,6 +138,12 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="dropdown">
+                        <a href="{{url('wishlistUser')}}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-1 fa fa-heart fa-lg"></i>
+                            <p class="d-none d-md-block mb-0" >Wishlist</p>
+                        </a>
+                    </div>
                 @endguest
                 </div>
               </div>
@@ -146,10 +153,10 @@
               <div class="col-lg-5 col-md-12 col-12" style="width:100%;">
                 <form action="{{route('showCatalog')}}" method="GET" class="input-group float-center">
                   <div class="d-flex flex-row w-100">
-                    <div class="form-outline" style="width:100%;">
-                      <input type="search" id="form1" class="form-control" name="search"/>
-                      <label class="form-label" for="form1">Search</label>
-                    </div>
+                  <div class="form-outline border" style="width:100%;">
+                    <input type="search" id="form1" class="form-control" name="search"/>
+                    <label class="form-label" for="form1">Search</label>
+                  </div>
                     <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;">
                       <i class="fas fa-search"></i>
                     </button>

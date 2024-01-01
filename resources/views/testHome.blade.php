@@ -15,16 +15,18 @@
               <!-- Left links -->
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- Navbar dropdown -->
-                @foreach ($categories as $category)
-                    <li class="nav-item dropdown">
-                      <a class="nav-link " href="{{ route('categoryFilter', ['category' => $category['id']]) }}" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        {{ $category['CatName'] }}
-                      </a>
-                @endforeach
+                
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Semua Kategori</a>
+                <a class="nav-link" href="#">Semua Kategori</a>
                 </li>
+                @foreach($categories as $category)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categoryFilter', ['id' => $category->id]) }}">
+                        {{ $category->CatName }}
+                    </a>
+                </li>
+                @endforeach
               </ul>
               <!-- Left links -->
             </div>

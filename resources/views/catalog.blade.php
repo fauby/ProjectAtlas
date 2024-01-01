@@ -1,7 +1,7 @@
 @extends('test.header')
 
 
-@section('content')
+@section('content') 
 <!-- sidebar + content -->
 <section class="">
   <div class="container">
@@ -39,14 +39,13 @@
               <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                 <div class="accordion-body">
                   <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark">Elektronik </a></li>
-                    <li><a href="#" class="text-dark">Interior </a></li>
-                    <li><a href="#" class="text-dark">Otomotif </a></li>
-                    <li><a href="#" class="text-dark">Olahraga </a></li>
-                    <li><a href="#" class="text-dark">Mainan dan Hobi </a></li>
-                    <li><a href="#" class="text-dark">Pakaian</a></li>
-                    <li><a href="#" class="text-dark">Buku dan majalah </a></li>
-                    <li><a href="#" class="text-dark">Alat Musik</a></li>
+                  @foreach($categories as $category)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categoryFilter', ['id' => $category->id]) }}">
+                        {{ $category->CatName }}
+                    </a>
+                </li>
+                @endforeach
                   </ul>
                 </div>
               </div>
@@ -162,7 +161,7 @@
       <!-- content -->
       <div class="col-lg-9">
         <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-          <strong class="d-block py-2">32 Barang ditemukan </strong>
+        <strong class="d-block py-2">{{ $productsCount }} Barang ditemukan </strong>
           <div class="ms-auto">
             <select class="form-select d-inline-block w-auto border pt-1">
               <option value="0">Paling Sesuai</option>
@@ -189,7 +188,8 @@
             @endif
             @foreach($products as $product)
                 <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
-                    <div class="card w-100 my-2 shadow-2-strong">
+                    <div class="card w-100 my-2 shadow-2-strong"> 
+                    <a href="{{ route('showProductDetail', ['id' => $product['id']]) }}" style="color:inherit;" class="img-wrap">
                         @foreach($images as $image)
                             @if ($image['ProductID'] == $product['id'])
                                 <img src="{{ asset($image['Images']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}">  
@@ -216,6 +216,7 @@
                                 <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
             @endforeach

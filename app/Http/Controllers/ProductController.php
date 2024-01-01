@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Images;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
@@ -122,5 +123,24 @@ class ProductController extends Controller
 
         // return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
         // return view('detailProduct', compact(['product', 'user', 'images', 'hari']));
+    }
+
+    public function addToWishlist($id)
+    {
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Check if the product is already in the wishlist
+        if (!Wishlist::where('ProductID', $id)->where('UserID', auth()->id())->exists()){
+            // If not, add it to the wishlist
+            Wishlist::create([
+                'ProductID' => $id,
+                'UserID' => $user->id,
+            ]);
+
+            return redirect()->back()->with('success', 'Product added to wishlist.');
+        }
+
+        return redirect()->back()->with('warning', 'Product is already in the wishlist.');
     }
 }

@@ -19,7 +19,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $products = Product::with('images')->where('SellerID', '=', $user->id)->get();
-        $productsCount = $products->count();
+        $productsCount = $products->count(); 
         $images = Images::all();
         return view('profile', compact(['user', 'products', 'productsCount', 'images']));
     }
