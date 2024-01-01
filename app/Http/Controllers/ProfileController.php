@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Images;
+use App\Models\Category;
 
 class ProfileController extends Controller
 {
@@ -45,9 +46,10 @@ class ProfileController extends Controller
         }
 
         $productsCount = $products->count();
+        $images = Images::all();
         
         // Pass $sellerId to the view to determine if it's the authenticated user's profile or another seller's profile
-        return view('profile', compact(['user', 'products', 'productsCount']));
+        return view('profile', compact(['user', 'products', 'productsCount', 'images']));
     }
 
 
@@ -90,6 +92,26 @@ class ProfileController extends Controller
         $user->update($data);
 
         return redirect()->route('testHome')->with('success', 'Profile updated successfully.');
+    }
+
+    public function addCategoryForm()
+    {
+        return view('addCategory');
+    }
+
+    public function addCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            // Tambahkan validasi lainnya sesuai kebutuhan
+        ]);
+
+        Category::create([
+            'CatName' => $request->input('name'),
+            // Tambahkan kolom lain sesuai kebutuhan
+        ]);
+
+        return redirect()->route('showProfile')->with('success', 'Category added successfully.');
     }
 
 }

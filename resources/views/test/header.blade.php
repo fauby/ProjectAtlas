@@ -144,6 +144,12 @@
                             <p class="d-none d-md-block mb-0" >Wishlist</p>
                         </a>
                     </div>
+                    <div class="dropdown">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button> 
+                        </form>
+                    </div>
                 @endguest
                 </div>
               </div>

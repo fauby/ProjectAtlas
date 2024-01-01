@@ -18,8 +18,9 @@ class CatalogController extends Controller
             return $query->where('Title', 'like', '%' . $search . '%');
         })->get();
         $images = Images::all();
+        $categories = Category::all();
         $productsCount = $products->count();
-        return view('catalog', compact(['products', 'images','productsCount']));
+        return view('catalog', compact(['products', 'images','productsCount', 'categories']));
     }
 
     public function categoryFilter(Request $request, $id)

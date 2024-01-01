@@ -20,6 +20,9 @@
                     <a href="{{ route('profileedit')}}" class="btn btn-secondary shadow-0 me-1 my-1">Edit profil</a>
                     <a href="{{ route('create') }}" class="btn btn-secondary shadow-0 me-1 my-1">Jual Barang</a>
                 @endif
+                @if(auth()->user()->email == "test1234@gmail.com")
+                    <a href="{{ route('addCategory')}}" class="btn btn-secondary shadow-0 me-1 my-1">tambah category</a>
+                @endif
             </div>
         </div>
         <!-- Breadcrumb -->

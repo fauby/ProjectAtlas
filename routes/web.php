@@ -52,3 +52,5 @@ Route::post('/chat/sendOfferMessage/{userId}', [App\Http\Controllers\ChatControl
 //     //event(new PusherBroadcast('Lorem Ipsum'));
 //     return view('chat');
 // });
+Route ::get('/addCategory', [App\Http\Controllers\ProfileController::class, 'addCategoryForm'])->name('addCategoryForm');
+Route ::post('/addCategory', [App\Http\Controllers\ProfileController::class, 'addCategory'])->name('addCategory');

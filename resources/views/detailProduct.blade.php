@@ -61,7 +61,7 @@
             <dd class="col-9">{{$product['Condition']}}</dd>
 
             <dt class="col-3">Lokasi</dt>
-            <dd class="col-9">Bandung</dd>
+            <dd class="col-9">{{$user['location']}}</dd>
           </div>
 
           <hr />
@@ -107,14 +107,19 @@
     </div>
   </div>
 </section>
-<section class="bg-light border-top py-4">
+<section class="bg-light border-top py-4 my-5 ">
   <h3 style="padding-left: 7%; padding-bottom: 0.5%;">Produk Serupa</h3>
   <div class="row px-5 mx-5">
-    @foreach($products as $produk)
-    <div class="col-lg-4 col-md-6 col-sm-6 d-flex flex-wrap justify-content-between">
+    @foreach($produk as $produk)
+    <div class="col-lg-4 col-md-6 col-sm-6 ">
       <a href="{{ route('showProductDetail', ['id' => $produk['id']]) }}" style="color:inherit;">
       <div class="card w-90 my-2 shadow-2-strong">
-        <img src="{{ asset($produk->images->first()->Images) }}" class="card-img-top" style = "aspect-ratio: 1/1;"/>
+      @foreach($fotos as $foto)
+                        @if ($foto['ProductID'] == $produk['id'])
+                          <img src="{{ asset($foto['Images']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}">  
+                          @break
+                        @endif
+                      @endforeach
         <div class="card-body d-flex flex-column" style="color:inherit">
           <div class="d-flex flex-column">
             <h5 class="mb-1 me-1">{{ $produk['Title']}}</h5>
@@ -126,7 +131,7 @@
           <div class="d-flex flex-row align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#c0c0c0}</style><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
             <p class="text-muted px-1 m-0">
-              Bandung
+            {{$user['location']}}
             </p>
           </div>
           <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">

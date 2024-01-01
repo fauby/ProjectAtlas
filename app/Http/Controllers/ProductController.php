@@ -112,14 +112,16 @@ class ProductController extends Controller
         // $products = Product::all();
 
         // $hari = Carbon::now()->diffInDays($product->created_at);
-
+        $produk = Product::all();
         $product = Product::findOrFail($id);
         $user = User::findOrFail($product->SellerID);
+        $pengguna = User::all();
         $images = Images::where('ProductID', $product->id)->get();
+        $fotos = Images::all();
         $products = Product::all();
         $hari = Carbon::now()->diffInDays($product->created_at);
 
-        return view('detailProduct', compact(['product', 'user', 'images', 'products','hari']));
+        return view('detailProduct', compact(['product', 'user', 'images', 'products','hari', 'produk','fotos','pengguna']));
 
         // return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
         // return view('detailProduct', compact(['product', 'user', 'images', 'hari']));
@@ -143,4 +145,5 @@ class ProductController extends Controller
 
         return redirect()->back()->with('warning', 'Product is already in the wishlist.');
     }
+
 }
