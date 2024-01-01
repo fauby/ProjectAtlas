@@ -143,7 +143,13 @@
                             <i class="me-1 fa fa-heart fa-lg"></i>
                             <p class="d-none d-md-block mb-0" >Wishlist</p>
                         </a>
-                    </div>
+                    </div> 
+                    <!-- <div class="dropdown">
+                        <a href="{{route('chat.history', ['userId' => $user->id]) }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="me-1 fa fa-heart fa-lg"></i>
+                            <p class="d-none d-md-block mb-0" >Chat</p>
+                        </a>
+                    </div> -->
                     <div class="dropdown">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
