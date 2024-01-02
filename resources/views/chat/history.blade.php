@@ -14,12 +14,17 @@
         @foreach($users as $user)
             <div class="list-group rounded-0">
               <a class="list-group-item list-group-item-action active text-white rounded-0" href="{{ route('chat.history', ['userId' => $user->id]) }}">
-                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                <div class="media"><img src="{{asset($user['image'])}}" alt="" class="rounded-circle" style="margin-right: 20px; width: 50px; height: 50px; object-fit: cover;">
                   <div class="media-body ml-4">
                     <div class="d-flex align-items-center justify-content-between mb-1">
                       <h6 class="mb-0">{{ $user->name }}</h6><small class="small font-weight-bold">25 Dec</small>
                     </div>
-                    <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    @foreach($allChat->reverse() as $chat) 
+                      @if($chat->sender_id == $user->id || $chat->receiver_id == $user->id)
+                        <p class="font-italic mb-0 text-small">{{ $chat->message }}</p>
+                        @break
+                      @endif
+                    @endforeach
                   </div>
                 </div>
               </a>
@@ -31,24 +36,12 @@
   <div class="align-items-center" style="min-width:100%; margin-rigth:1%">
     <div class="col-7 px-0">
       <div class="px-4 py-5 pt-0 chat-box bg-white w-100 chat">
-          <div class="d-flex flex-row media w-100 py-3 mb-3 position-sticky sticky-top bg-white justify-content-between" style="max-height: 20%;">
+          <div class="d-flex flex-row media w-100 py-3 mb-3 position-sticky sticky-top bg-white justify-content-start" style="max-height: 20%;">
+              <img src="{{asset($seller['image'])}}" alt="" class="rounded-circle" style="margin-right: 20px; width: 50px; height: 50px; object-fit: cover;">
               <div class="d-flex flex-row align-items-center" style="width: 50%">
-                  <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp" alt="user" style="height: 100%; " class="me-3">
                   <div class="d-flex flex-column justify-content-start">
-                      <p class="m-0">Kaos oblong</p>
-                      <p class="m-0">Rp. 120.000</p>
-                  </div>
-              </div>
-              <div class="media-body">
-                  <div class="rounded py-2 px-3 mb-2">
-                      <p class="text-small mb-0 text-muted">Buat penawaran</p>
-                      <div class="d-flex flex-row">
-                          <div class="form-outline w-100" style="width: 250px;">
-                            <input type="number" id="typeNumber" class="form-control" />
-                            <label class="form-label" for="typeNumber">Rp</label>
-                          </div>
-                          <a href="#" class="btn btn-warning shadow-0"> Tawar </a>
-                        </div>
+                      <p class="m-0">{{ $seller->name }}</p>
+                      <p class="m-0">{{ $seller->location }}</p>
                   </div>
               </div>
           </div>

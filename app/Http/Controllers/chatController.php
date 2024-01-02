@@ -57,12 +57,13 @@ class chatController extends Controller
     public function showChatHistory($otherUserId)
     { 
         $users = User::all();
+        $seller = User::find($otherUserId);
         $chats = Chat::where(function ($query) use ($otherUserId) {
             $query->where('sender_id', Auth::id())->where('receiver_id', $otherUserId);
         })->orWhere(function ($query) use ($otherUserId) {
             $query->where('sender_id', $otherUserId)->where('receiver_id', Auth::id());
         })->orderBy('created_at', 'asc')->get();
-
-        return view('chat.history', compact('chats', 'otherUserId', 'users'));
+        $allChat = Chat::all();
+        return view('chat.history', compact('chats', 'otherUserId', 'users', 'seller', 'allChat'));
     }
 }

@@ -15,12 +15,11 @@
             @foreach($users as $user)
                 <div class="list-group rounded-0">
                   <a class="list-group-item list-group-item-action active text-white rounded-0" href="{{ route('chat.history', ['userId' => $user->id]) }}">
-                    <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                    <div class="media"><img src="{{asset($user['image'])}}" alt="" class="rounded-circle" style="margin-right: 20px; width: 50px; height: 50px; object-fit: cover;">
                       <div class="media-body ml-4">
                         <div class="d-flex align-items-center justify-content-between mb-1">
                           <h6 class="mb-0">{{ $user->name }}</h6><small class="small font-weight-bold">25 Dec</small>
                         </div>
-                        <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
                       </div>
                     </div>
                   </a>
