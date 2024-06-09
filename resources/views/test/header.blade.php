@@ -74,7 +74,7 @@
               <!-- Left elements -->
               <div class="col-lg-2 col-sm-4 col-4">
                 <a href = "/test" class="float-start">
-                    <img src="{{ asset('images/ewe.png') }}" alt="Example Image" height="50" >
+                    <img src="{{ asset('images/atlas.png') }}" alt="Example Image" height="50" >
                 </a>
               </div>
               <!-- Left elements -->

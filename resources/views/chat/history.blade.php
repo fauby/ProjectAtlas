@@ -12,23 +12,31 @@
 
       <div class="messages-box">
         @foreach($users as $user)
-            <div class="list-group rounded-0">
-              <a class="list-group-item list-group-item-action active text-white rounded-0" href="{{ route('chat.history', ['userId' => $user->id]) }}">
-                <div class="media"><img src="{{asset($user['image'])}}" alt="" class="rounded-circle" style="margin-right: 20px; width: 50px; height: 50px; object-fit: cover;">
-                  <div class="media-body ml-4">
-                    <div class="d-flex align-items-center justify-content-between mb-1">
-                      <h6 class="mb-0">{{ $user->name }}</h6><small class="small font-weight-bold">25 Dec</small>
-                    </div>
-                    @foreach($allChat->reverse() as $chat) 
-                      @if($chat->sender_id == $user->id || $chat->receiver_id == $user->id)
-                        <p class="font-italic mb-0 text-small">{{ $chat->message }}</p>
-                        @break
-                      @endif
-                    @endforeach
-                  </div>
+            @php
+                // Filter chats to get only those involving the current user and $user
+                $userChats = $allChat->filter(function ($chat) use ($user) {
+                    return $chat->sender_id == Auth::id() && $chat->receiver_id == $user->id
+                        || $chat->sender_id == $user->id && $chat->receiver_id == Auth::id();
+                });
+
+                // Get the most recent chat for this user
+                $recentChat = $userChats->last();
+            @endphp
+
+            @if($recentChat)
+                <div class="list-group rounded-0">
+                    <a class="list-group-item list-group-item-action active text-white rounded-0" href="{{ route('chat.history', ['userId' => $user->id]) }}">
+                        <div class="media"><img src="{{asset($user['image'])}}" alt="" class="rounded-circle" style="margin-right: 20px; width: 50px; height: 50px; object-fit: cover;">
+                            <div class="media-body ml-4">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h6 class="mb-0">{{ $user->name }}</h6><small class="small font-weight-bold">{{ $recentChat->created_at->format('d M') }}</small>
+                                </div>
+                                <p class="font-italic mb-0 text-small">{{ $recentChat->message }}</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-              </a>
-            </div>
+            @endif
         @endforeach
       </div>
     </div>
@@ -70,42 +78,43 @@
   </div>
 </div>
 @endsection
-  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script>
-  const pusher  = new Pusher('{{config('broadcasting.connections.pusher.key')}}', {cluster: 'ap1', encrypted: true});
-  const channel = pusher.subscribe('public');
 
-  //Receive Messages
-  channel.bind('chat', function (data) {
-    $.post("/receive", {
-      _token:  '{{csrf_token()}}',
-      message: data.message,
-    })
-     .done(function (res) {
-       $(".messages > .message").last().after(res);
-       $(document).scrollTop($(document).height());
-     });
-  });
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+const pusher  = new Pusher('{{config('broadcasting.connections.pusher.key')}}', {cluster: 'ap1', encrypted: true});
+const channel = pusher.subscribe('public');
 
-  //Broadcast messages
-  $("#chatForm").submit(function (event) {
-   event.preventDefault();
-   $.ajax({
-      url: "/sendMessage",
-      method: 'POST',
-      headers: {
-         'X-Socket-Id': pusher.connection.socket_id
-      },
-      data: {
-         _token: '{{ csrf_token() }}',
-         message: $("#message").val(), // Menggunakan id langsung
-      }
-   }).done(function (res) {
-      $(".messages").append(res); // Menggunakan .append() untuk menambahkan pesan
-      $("#message").val(''); // Mengosongkan input setelah pesan terkirim
-      $(document).scrollTop($(document).height());
+//Receive Messages
+channel.bind('chat', function (data) {
+  $.post("/receive", {
+    _token:  '{{csrf_token()}}',
+    message: data.message,
+  })
+   .done(function (res) {
+     $(".messages > .message").last().after(res);
+     $(document).scrollTop($(document).height());
    });
+});
+
+//Broadcast messages
+$("#chatForm").submit(function (event) {
+ event.preventDefault();
+ $.ajax({
+    url: "/sendMessage",
+    method: 'POST',
+    headers: {
+       'X-Socket-Id': pusher.connection.socket_id
+    },
+    data: {
+       _token: '{{ csrf_token() }}',
+       message: $("#message").val(), // Menggunakan id langsung
+    }
+ }).done(function (res) {
+    $(".messages").append(res); // Menggunakan .append() untuk menambahkan pesan
+    $("#message").val(''); // Mengosongkan input setelah pesan terkirim
+    $(document).scrollTop($(document).height());
+ });
 });
 
 </script>

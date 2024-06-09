@@ -15,7 +15,7 @@
               <!-- Left links -->
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- Navbar dropdown -->
-                
+
 
                 <li class="nav-item">
                 <a class="nav-link" href="#">Semua Kategori</a>
@@ -89,7 +89,7 @@
                       </div>
                       @foreach($images as $image)
                         @if ($image['ProductID'] == $product['id'])
-                          <img src="{{ asset($image['Images']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}">  
+                          <img src="{{ asset($image['Images']) }}" class="card-img-top" style="aspect-ratio: 1 / 1" alt="{{ $product['Title'] }}">
                           @break
                         @endif
                       @endforeach
@@ -118,106 +118,6 @@
 </section>
 <!-- Products -->
 
-<!-- Recently viewed -->
-<section class="mt-5 mb-4">
-  <div class="container text-dark">
-    <header class="">
-      <h3 class="section-title">Baru saja dilihat</h3>
-    </header>
-
-    <div class="row gy-3">
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.webp" />
-        </a>
-      </div>
-      <!-- col.// -->
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/2.webp" />
-        </a>
-      </div>
-      <!-- col.// -->
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/3.webp" />
-        </a>
-      </div>
-      <!-- col.// -->
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/4.webp" />
-        </a>
-      </div>
-      <!-- col.// -->
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp" />
-        </a>
-      </div>
-      <!-- col.// -->
-      <div class="col-lg-2 col-md-4 col-4">
-        <a href="#" class="img-wrap">
-          <img height="200" width="200" class="img-thumbnail" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/6.webp" />
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Recently viewed -->
-
-<section>
-  <div class="container">
-    <div class="px-4 pt-3 border">
-      <div class="row pt-1">
-        <div class="col-lg-3 col-md-6 mb-3 d-flex">
-          <div class="d-flex align-items-center">
-            <div class="badge badge-warning p-2 rounded-4 me-3">
-              <i class="fas fa-thumbs-up fa-2x fa-fw"></i>
-            </div>
-            <span class="info">
-              <h6 class="title">Reasonable prices</h6>
-              <p class="mb-0">Have you ever finally just</p>
-            </span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3 d-flex">
-          <div class="d-flex align-items-center">
-            <div class="badge badge-warning p-2 rounded-4 me-3">
-              <i class="fas fa-plane fa-2x fa-fw"></i>
-            </div>
-            <span class="info">
-              <h6 class="title">Worldwide shipping</h6>
-              <p class="mb-0">Have you ever finally just</p>
-            </span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3 d-flex">
-          <div class="d-flex align-items-center">
-            <div class="badge badge-warning p-2 rounded-4 me-3">
-              <i class="fas fa-star fa-2x fa-fw"></i>
-            </div>
-            <span class="info">
-              <h6 class="title">Best ratings</h6>
-              <p class="mb-0">Have you ever finally just</p>
-            </span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3 d-flex">
-          <div class="d-flex align-items-center">
-            <div class="badge badge-warning p-2 rounded-4 me-3">
-              <i class="fas fa-phone-alt fa-2x fa-fw"></i>
-            </div>
-            <span class="info">
-              <h6 class="title">Help center</h6>
-              <p class="mb-0">Have you ever finally just</p>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 @endsection
 
 

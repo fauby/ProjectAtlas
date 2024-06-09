@@ -63,18 +63,15 @@ class ProfileController extends Controller
             'location' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $data = [
             'name' => $request->filled('name') ? $request->input('name') : $user->name,
             'email' => $request->filled('email') ? $request->input('email') : $user->email,
             'location' => $request->filled('location') ? $request->input('location') : $user->location,
         ];
-
         // Update password only if provided
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->input('password'));
         }
-
         // Update image only if provided
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('public/images');

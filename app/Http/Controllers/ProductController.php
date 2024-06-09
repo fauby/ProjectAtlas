@@ -34,11 +34,9 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        // $user = Auth::user();
-        // $categories = Category::all();
-        // Validate the request data
+
         try {
-            // Validate the request data
+
             $request->validate([
                 'SellerID' => 'required',
                 'Title' => 'required',
@@ -49,11 +47,6 @@ class ProductController extends Controller
                 'Images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            // Store the uploaded image
-            // $imagePath = $request->file('Image')->storeAs('public/images', $request->Image->hashName());
-            // $imagePath = $request->file('Image')->store('public/images');
-
-            // Create a new Product with the form data
             $product = new Product([
                 'SellerID' => $request->input('SellerID'),
                 'Title' => $request->input('Title'),
@@ -61,31 +54,29 @@ class ProductController extends Controller
                 'Price' => $request->input('Price'),
                 'Category' => $request->input('Category'),
                 'Condition' => $request->input('Condition'),
-                // 'Image' => $request->file('Image')->store('storage/images'), // Save the path to the stored image
             ]);
-
-            // Save the product to the database
             $product->save();
-
-            // Store the uploaded images
             foreach ($request->file('Images') as $image) {
                 $image->store('public/images');
-                // $product->images()->create(['Images' => $image->store('storage/images')]);
-                // $product->images()->create([
-                //     'Images' => $image->store('storage/images'),
-                //     'ProductID' => $product->id,
-                // ]);
                 Images::create([
                     'Images' => $image->store('storage/images'),
                     'ProductID' => $product->id,
                 ]);
-
             }
 
-            // $product->save();
-
-
-            // Redirect with success message
+            // foreach ($request->file('Images') as $image) {
+            //     $destination_path = 'public/images/menu';
+            //     // $image = $request->file('image');
+            //     dd($image, $image_name);
+            //     $image_name = $id.'_'.time().'_'.$image->getClientOriginalName();
+            //     // $image->move(public_path('images'), $image_name);
+            //     $path = $request->file('image')->storeAs($destination_path, $image_name);
+            //     $path2 = 'storage/images/menu/'.$image_name;
+            //     Images::create([
+            //         'Images' => $image->$path2,
+            //         'ProductID' => $product->id,
+            //     ]);
+            // }
             return redirect()->route('showProfile')->with('success', 'Product created successfully.');
 
         } catch (\Exception $e) {
@@ -97,15 +88,24 @@ class ProductController extends Controller
         }
     }
 
-    public function show ()
+    public function show()
     {
         // Fetch products from the database
         $products = Product::all();
         $images = Images::all(); // Or adjust this query based on your needs
         $categories = Category::all();
-        // Pass the $products variable to the view
+
+        // If the request accepts JSON, return JSON data
+        return response()->json([
+            'products' => $products,
+            'images' => $images,
+            'categories' => $categories
+        ]);
+
         return view('testHome', compact('products', 'images', 'categories'));
+
     }
+
 
     public function showProductDetail($id) {
         // $user = User::findOrFail($product->SellerID);
@@ -120,6 +120,13 @@ class ProductController extends Controller
         $fotos = Images::all();
         $products = Product::all();
         $hari = Carbon::now()->diffInDays($product->created_at);
+
+        return response()->json([
+            'product' => $product,
+            'user' => $user,
+            'images' => $images,
+            'hari' => $hari,
+        ]);
 
         return view('detailProduct', compact(['product', 'user', 'images', 'products','hari', 'produk','fotos','pengguna']));
 
@@ -146,4 +153,16 @@ class ProductController extends Controller
         return redirect()->back()->with('warning', 'Product is already in the wishlist.');
     }
 
+    // Public function index()
+    // {
+    //     $prods = Product::get();
+    //     if (request()->segment(1) == 'api') return  response()->json([
+    //         'error' => false,
+    //         'list' => $prods,
+    //     ]);
+    //     return view('testHome', [
+    //         'title' => 'Daftar Produk',
+    //         'data' => $prods,
+    //     ]);
+    // }
 }
