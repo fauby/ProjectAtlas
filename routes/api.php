@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductApiController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
@@ -24,20 +25,13 @@ use App\Http\Controllers\AuthController;
 
 
 // Route::resource('product', ProductController::class);
-Route::get('products', [ProductController::class, 'show']);
+Route::get('products', [ProductApiController::class, 'show']);
+Route::get('images/{productId}', [ProductApiController::class, 'images']);
+// Route::get('products', [ProductController::class, 'show']);
 Route::get('product/{id}', [ProductController::class, 'showProductDetail']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
 Route::get('/productDetail/{id}', [ProductController::class, 'showProductDetail']);
-Route::get('/image/{filename}', function ($filename) {
-    $path = public_path('storage/images/' . $filename);
-
-    if (!file_exists($path)) {
-        return response()->json(['error' => 'Image not found'], 404);
-    }
-
-    return response()->json(['url' => asset('storage/images/' . $filename)]);
-});
 
 
 // Route::prefix('products')->group(function () {
