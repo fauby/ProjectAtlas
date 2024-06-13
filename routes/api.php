@@ -37,6 +37,7 @@ Route::get('/wishlist/{userId}', [CatalogApiController::class, 'wishlist']);
 Route::put('/user/{user}', [UpdateProfileController::class, 'update']);
 Route::post('/upload/add', [ProductApiController::class, 'store']);
 Route::get('chats/{userId}', [ChatController::class, 'showChatHistory']);
+Route::post('/profile/update-image/{user}', [UpdateProfileController::class, 'updateImage']);
 
 
 

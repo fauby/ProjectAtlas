@@ -44,6 +44,39 @@ class UpdateProfileController extends Controller
             'data' => $user
         ]);
     }
+
+    public function updateImage(Request $request, User $user)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                $validator->errors(),
+                422
+            );
+        }
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            // Images::create([
+            //     'Images' => $image->store('storage/images')
+            // ]);
+            $user->update(['image' => $imagePath]);
+        }
+        // Update image only if provided
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('public/images');
+        //     $data['image'] = $request->file('image')->store('storage/images');
+        // }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile image updated successfully.',
+            'data' => $user
+        ]);
+    }
 }
 
 ?>
