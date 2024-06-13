@@ -96,11 +96,11 @@ class ProductController extends Controller
         $categories = Category::all();
 
         // If the request accepts JSON, return JSON data
-        return response()->json([
-            'products' => $products,
-            'images' => $images,
-            'categories' => $categories
-        ]);
+        // return response()->json([
+        //     'products' => $products,
+        //     'images' => $images,
+        //     'categories' => $categories
+        // ]);
 
         return view('testHome', compact('products', 'images', 'categories'));
 
@@ -121,12 +121,12 @@ class ProductController extends Controller
         $products = Product::all();
         $hari = Carbon::now()->diffInDays($product->created_at);
 
-        return response()->json([
-            'product' => $product,
-            'user' => $user,
-            'images' => $images,
-            'hari' => $hari,
-        ]);
+        // return response()->json([
+        //     'product' => $product,
+        //     'user' => $user,
+        //     'images' => $images,
+        //     'hari' => $hari,
+        // ]);
 
         return view('detailProduct', compact(['product', 'user', 'images', 'products','hari', 'produk','fotos','pengguna']));
 

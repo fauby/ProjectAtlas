@@ -7,6 +7,9 @@ use App\Http\Controllers\ProductApiController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CatalogApiController;
+use App\Http\Controllers\UpdateProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +26,18 @@ use App\Http\Controllers\AuthController;
 //     return $request->user();
 // });
 
-
-// Route::resource('product', ProductController::class);
 Route::get('products', [ProductApiController::class, 'show']);
 Route::get('images/{productId}', [ProductApiController::class, 'images']);
-// Route::get('products', [ProductController::class, 'show']);
 Route::get('product/{id}', [ProductController::class, 'showProductDetail']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
-Route::get('/productDetail/{id}', [ProductController::class, 'showProductDetail']);
+Route::get('/productDetail/{id}', [ProductApiController::class, 'showProductDetail']);
+Route::get('/users/{id}', [ProductApiController::class, 'userImage']);
+Route::get('/wishlist/{userId}', [CatalogApiController::class, 'wishlist']);
+Route::put('/user/{user}', [UpdateProfileController::class, 'update']);
+Route::post('/upload/add', [ProductApiController::class, 'store']);
+Route::get('chats/{userId}', [ChatController::class, 'showChatHistory']);
+
 
 
 // Route::prefix('products')->group(function () {

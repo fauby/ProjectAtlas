@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
- 
+
 // HOME
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', [App\Http\Controllers\ProductController::class, 'show'])->name('testHome');
@@ -41,7 +41,7 @@ Route::get('/filter/{id}', [App\Http\Controllers\CatalogController::class, 'cate
 // Chat
 //Route::get('/chat', [App\Http\Controllers\chatController::class, 'index'])->name('index');
 Route::post('/wishlist/{id}', [App\Http\Controllers\ProductController::class, 'addToWishlist'])
-    ->middleware('auth') 
+    ->middleware('auth')
     ->name('wishlist');
 Route::get('/wishlistUser', [App\Http\Controllers\CatalogController::class, 'wishlist'])->name('wishlistUser');Route::get('/chat', 'App\Http\Controllers\chatController@index');
 Route::get('/chat/history/{userId}', [App\Http\Controllers\ChatController::class, 'showChatHistory'])->name('chat.history');

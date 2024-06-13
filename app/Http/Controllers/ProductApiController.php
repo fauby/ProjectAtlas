@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -14,29 +13,10 @@ use Carbon\Carbon;
 
 class ProductApiController extends Controller
 {
-    public function create(){
-        $user = Auth::user();
-        $categories = Category::all();
 
-        $categoryAttributes = $categories->map(function ($category) {
-            return collect($category->getAttributes())->toArray();
-        })->toArray();
-
-        // dd($categoryAttributes);
-
-        if (!$user) {
-            return redirect()->route('login');
-        }else{
-            // return view('uploadProduct');
-            return view('uploadProduct')->with('categoryInfo', $categoryAttributes);
-        }
-
-    }
-
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         try {
-
             $request->validate([
                 'SellerID' => 'required',
                 'Title' => 'required',
@@ -44,9 +24,10 @@ class ProductApiController extends Controller
                 'Price' => 'required',
                 'Category' => 'required',
                 'Condition' => 'required',
-                'Images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
+            // Save the product information
             $product = new Product([
                 'SellerID' => $request->input('SellerID'),
                 'Title' => $request->input('Title'),
@@ -56,37 +37,28 @@ class ProductApiController extends Controller
                 'Condition' => $request->input('Condition'),
             ]);
             $product->save();
-            foreach ($request->file('Images') as $image) {
-                $image->store('public/images');
+
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $path = $image->store('public/images'); // Store the image
+                // Associate the image with the product
                 Images::create([
+                    // 'Images' => $path,
                     'Images' => $image->store('storage/images'),
                     'ProductID' => $product->id,
                 ]);
             }
 
-            // foreach ($request->file('Images') as $image) {
-            //     $destination_path = 'public/images/menu';
-            //     // $image = $request->file('image');
-            //     dd($image, $image_name);
-            //     $image_name = $id.'_'.time().'_'.$image->getClientOriginalName();
-            //     // $image->move(public_path('images'), $image_name);
-            //     $path = $request->file('image')->storeAs($destination_path, $image_name);
-            //     $path2 = 'storage/images/menu/'.$image_name;
-            //     Images::create([
-            //         'Images' => $image->$path2,
-            //         'ProductID' => $product->id,
-            //     ]);
-            // }
-            return redirect()->route('showProfile')->with('success', 'Product created successfully.');
+            return response()->json(['message' => 'Product created successfully.'], 200);
 
         } catch (\Exception $e) {
-            // Log the exception for further investigation
             \Log::error('Error creating product: ' . $e->getMessage());
-
-            // Redirect back with an error message
-            return redirect()->back()->with('error', 'Error creating product. Please try again.');
+            return response()->json(['error' => 'Error creating product. Please try again.'], 500);
         }
     }
+
+
 
     public function show()
     {
@@ -94,6 +66,7 @@ class ProductApiController extends Controller
         $products = Product::all();
         $images = Images::all();
         $categories = Category::all();
+        $wishlist = Wishlist::all();
 
         // Create a map of product images for quick lookup
         $productImages = [];
@@ -110,7 +83,8 @@ class ProductApiController extends Controller
         // If the request expects JSON, return JSON response
         return response()->json([
             'products' => $productsWithImages,
-            'categories' => $categories
+            'categories' => $categories,
+            'wishlist'=> $wishlist
         ]);
 
         // Otherwise, return the view with the data
@@ -132,15 +106,15 @@ class ProductApiController extends Controller
         $fotos = Images::all();
         $products = Product::all();
         $hari = Carbon::now()->diffInDays($product->created_at);
+        $categories = Category::all();
 
         return response()->json([
             'product' => $product,
             'user' => $user,
             'images' => $images,
             'hari' => $hari,
+            'categories' => $categories,
         ]);
-
-        return view('detailProduct', compact(['product', 'user', 'images', 'products','hari', 'produk','fotos','pengguna']));
 
         // return view('detailProduct', compact(['product', 'user', 'products', 'hari']));
         // return view('detailProduct', compact(['product', 'user', 'images', 'hari']));
@@ -187,6 +161,25 @@ class ProductApiController extends Controller
             return response()->json(['error' => 'Product not found'], 404);
         }
     }
+
+    public function userImage($userId)
+    {
+        // Retrieve the user with the given ID from the database
+        $user = User::findOrFail($userId);
+
+        // Check if the user has an image
+        if ($user->image) {
+            // Construct the file path for the user's image
+            $imagePath = public_path($user->image);
+
+            // Return the user's image file as a response
+            return response()->file($imagePath);
+        } else {
+            // Return an error response if the user does not have an image
+            return response()->json(['error' => 'User image not found'], 404);
+        }
+    }
+
 
 
 }
