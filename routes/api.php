@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogApiController;
 use App\Http\Controllers\UpdateProfileController;
+use App\Http\Controllers\ChatController;
 
 
 /*

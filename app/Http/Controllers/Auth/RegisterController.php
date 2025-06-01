@@ -30,7 +30,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'location' => ['required', 'string', 'max:255'],
+            // 'location' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -38,9 +38,10 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'role' => $data['role'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'location' => $data['location'],
+            // 'location' => $data['location'],
         ]);
     }
 
@@ -50,21 +51,25 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'location' => ['required', 'string', 'max:255'],
+            // 'location' => ['required', 'string', 'max:255'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            return back()->withErrors($validator)->withInput();
         }
 
         $user = User::create([
             'name' => $request->name,
+            'role' => 'user',
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Hashing the password
-            'location' => $request->location,
+            'password' => Hash::make($request->password),
+            // 'location' => $request->location,
         ]);
 
-        return response()->json(['user' => $user], 201);
+        Auth::login($user);
+
+        return redirect()->route('testHome');
     }
+
 
 }

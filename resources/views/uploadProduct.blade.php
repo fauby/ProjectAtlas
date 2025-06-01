@@ -74,13 +74,29 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="Stock" class="col-md-4 col-form-label text-md-right">{{ __('Stock') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Stock" type="text" class="form-control @error('Stock') is-invalid @enderror" name="Stock" value="{{ old('Stock') }}" required autocomplete="Stock">
+
+                                @error('Stock')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="Category" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <select name="Category" id="Category" class="form-control">
-
+                                <select name="Category" id="Category" class="form-control" required>
+                                    <option value="">-- Select Category --</option>
                                     @foreach($categoryInfo as $category)
-                                        <option value="{{ $category["id"] }}">{{ $category["CatName"]}}</option>
+                                        <option value="{{ $category["id"] }}" {{ old('Category') == $category["id"] ? 'selected' : '' }}>
+                                            {{ $category["CatName"] }}
+                                        </option>
                                     @endforeach
                                 </select>
 
@@ -96,7 +112,11 @@
                             <label for="Condition" class="col-md-4 col-form-label text-md-right">{{ __('Condition') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Condition" type="text" class="form-control @error('Condition') is-invalid @enderror" name="Condition" value="{{ old('Condition') }}" required autocomplete="Condition">
+                                <select id="Condition" class="form-control @error('Condition') is-invalid @enderror" name="Condition" required>
+                                    <option value="">-- Select Condition --</option>
+                                    <option value="New" {{ old('Condition') == 'New' ? 'selected' : '' }}>New</option>
+                                    <option value="Used" {{ old('Condition') == 'Used' ? 'selected' : '' }}>Used</option>
+                                </select>
 
                                 @error('Condition')
                                     <span class="invalid-feedback" role="alert">

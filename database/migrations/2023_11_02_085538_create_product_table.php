@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('SellerID')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('Title');
             $table->text('Description');
-            $table->bigInteger('Price')->nullable();
+            $table->bigInteger('Price');
             $table->foreignId('Category')->constrained('category')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('Condition')->nullable();
+            $table->string('Condition');
+            $table->bigInteger('Stock');
             $table->timestamps();
         });
     }

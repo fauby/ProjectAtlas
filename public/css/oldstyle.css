@@ -1,0 +1,25 @@
+.icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+}
+
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* styles.css */
+
+/* Custom CSS to change carousel arrow color */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(100%);
+}

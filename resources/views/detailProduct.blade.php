@@ -54,6 +54,9 @@
           </p>
 
           <div class="row">
+            <dt class="col-3">Stok</dt>
+            <dd class="col-9">{{$product['Stock']}}</dd>
+
             <dt class="col-3">Diunggah</dt>
             <dd class="col-9">{{ $hari }} hari yang lalu</dd>
 
@@ -61,14 +64,18 @@
             <dd class="col-9">{{$product['Condition']}}</dd>
 
             <dt class="col-3">Lokasi</dt>
-            <dd class="col-9">{{$user['location']}}</dd>
+            <dd class="col-9">{{$user['address']}}</dd>
           </div>
 
           <hr />
 
-          <a href="{{ route('chat.history', ['userId' => $user->id]) }}" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Chat Penjual </a>
-          <!-- <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Suka </a>
-         -->
+          <form action="{{ route('cart.add', ['id' => $product['id']]) }}" method="POST">
+              @csrf
+              <button type="submit" class="btn btn-primary shadow-0">
+                  <i class="me-1 fa fa-shopping-basket"></i> Beli
+              </button>
+          </form>
+
          <form action="{{ route('wishlist', ['id' => $product]) }}" method="post">
            @method('POST')
             @csrf
@@ -76,20 +83,6 @@
                 <i class="me-1 fa fa-heart fa-lg"></i> Suka
             </button>
         </form>
-          <div class="col-md-4 col-6 mb-3 mt-3">
-            <label class="mb-2 d-block">Buat penawaran</label>
-            <div class="d-flex flex-row">
-              <form action="{{ route('sendOfferMessage' , ['userId'=> $user->id])}}" method="POST">
-                @csrf
-                <input type="hidden" name="product" value="{{ $product->Title }}">
-                <div class="form-outline w-100" style="width: 250px;">
-                  <input type="text" id="typeNumber" name="typeNumber" class="form-control" />
-                  <label class="form-label" for="typeNumber">Rp</label>
-                </div>
-                <button type="submit" class="btn btn-warning shadow-0"> Tawar </button>
-              </form>
-            </div>
-          </div>
         </div>
       </main>
     </div>
@@ -102,7 +95,7 @@
     <img src="{{asset($user['image'])}}" alt="" class="rounded-circle mx-5" style="width: 100px; height: 100px; object-fit: cover;">
     <div class="d-flex flex-column">
       <p class="fw-bold mb-0">{{ $user['name']}}</p>
-      <p class="mb-0">{{$user['location']}}</p>
+      <p class="mb-0">{{$user['address']}}</p>
       <a href="{{ route('showProfileSeller', ['id' => $user['id']]) }}">Kunjungi Profil</a> 
     </div>
   </div>

@@ -60,13 +60,13 @@ class ProfileController extends Controller
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'location' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $data = [
             'name' => $request->filled('name') ? $request->input('name') : $user->name,
             'email' => $request->filled('email') ? $request->input('email') : $user->email,
-            'location' => $request->filled('location') ? $request->input('location') : $user->location,
+            'address' => $request->filled('address') ? $request->input('address') : $user->address,
         ];
         // Update password only if provided
         if ($request->filled('password')) {
@@ -80,27 +80,12 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('testHome')->with('success', 'Profile updated successfully.');
+        return redirect()->route('showProfile')->with('success', 'Profile updated successfully.');
     }
 
     public function addCategoryForm()
     {
         return view('addCategory');
-    }
-
-    public function addCategory(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // Tambahkan validasi lainnya sesuai kebutuhan
-        ]);
-
-        Category::create([
-            'CatName' => $request->input('name'),
-            // Tambahkan kolom lain sesuai kebutuhan
-        ]);
-
-        return redirect()->route('showProfile')->with('success', 'Category added successfully.');
     }
 
 }

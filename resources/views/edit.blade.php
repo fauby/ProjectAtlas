@@ -55,12 +55,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('location') }}</label>
+                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="{{ $user->location}}" autocomplete="location">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="{{ $user->address}}" autocomplete="address">
 {{--
-                                @error('location')
+                                @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

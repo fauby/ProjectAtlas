@@ -42,6 +42,7 @@ class ProductController extends Controller
                 'Title' => 'required',
                 'Description' => 'required',
                 'Price' => 'required',
+                'Stock' => 'required',
                 'Category' => 'required',
                 'Condition' => 'required',
                 'Images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -52,6 +53,7 @@ class ProductController extends Controller
                 'Title' => $request->input('Title'),
                 'Description' => $request->input('Description'),
                 'Price' => $request->input('Price'),
+                'Stock' => $request->input('Stock'),
                 'Category' => $request->input('Category'),
                 'Condition' => $request->input('Condition'),
             ]);
@@ -151,6 +153,30 @@ class ProductController extends Controller
         }
 
         return redirect()->back()->with('warning', 'Product is already in the wishlist.');
+    }
+
+    public function showAdmin()
+    {
+        // Fetch products from the database
+        $products = Product::with('category')->get();
+        $images = Images::all(); // Or adjust this query based on your needs
+        $categories = Category::all();
+
+        // If the request accepts JSON, return JSON data
+        // return response()->json([
+        //     'products' => $products,
+        //     'images' => $images,
+        //     'categories' => $categories
+        // ]);
+
+        return view('admin.adminProduct', compact('products', 'images', 'categories'));
+
+    }
+
+    public function destroyAdmin($id)
+    {
+        Product::findOrFail($id)->delete();
+        return redirect()->route('adminProduct')->with('success', 'Product deleted successfully.');
     }
 
     // Public function index()

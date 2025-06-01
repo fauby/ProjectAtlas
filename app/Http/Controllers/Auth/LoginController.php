@@ -26,15 +26,22 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
+            $request->session()->regenerate(); // Recommended for security
 
-            return response()->json([
-                'user' => $user,
-                'token' => $token
-            ]);
+            $user = Auth::user();
+
+            /// Redirect based on role
+            if ($user->role === 'admin') {
+                return redirect()->route('adminHome');
+            }
+
+            return redirect()->route('testHome'); // or your default user home
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        // Redirect back with error
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
+
 }

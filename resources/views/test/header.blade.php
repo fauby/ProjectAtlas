@@ -145,6 +145,13 @@
                         </a>
                     </div> 
                     <div class="dropdown">
+                      <a href="{{ route('cart') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                          <i class="fas fa-shopping-cart m-1 me-md-2"></i>
+                          <p class="d-none d-md-block mb-0">Cart ({{ session('cart') ? count(session('cart')) : 0 }})</p>
+                      </a>
+                  </div>
+
+                    <div class="dropdown">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button> 
